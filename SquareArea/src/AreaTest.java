@@ -17,7 +17,7 @@ public class AreaTest {
         b.setCorr1(b1);
         b.setCorr2(b2);
         double S2 = b.RectanglesArea();
-        System.out.println("The area of the first rectangle is: " + S2);
+        System.out.println("The area of the second rectangle is: " + S2);
         double S3 = b.RectanglesCrossSection(a, b);
         System.out.println("The area of the cross section of rectangles is: " + S3);
     }
