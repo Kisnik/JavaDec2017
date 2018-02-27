@@ -6,7 +6,7 @@ public class General {
     public static void main(String[] args) throws IOException {
         Path toPath = Paths.get("D:\\MusicCache");
         Files.createDirectory(toPath);
-        Path fromPath = Paths.get("C:\\Users\\Kisnik\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Media Cache");
+        Path fromPath = Paths.get(Paths.get(System.getProperty("user.home"), "AppData", "Local", "Google", "Chrome", "User Data", "Default", "Media Cache").toString());
         DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
         for (Path file: stream) {
             String s = String.valueOf(file.getFileName());
