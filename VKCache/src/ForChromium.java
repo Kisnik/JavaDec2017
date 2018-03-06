@@ -1,47 +1,49 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.*;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ForChromium {
     public static void getMusic(Path fromPath, Path toPath){
-        List<Path> list = new ArrayList<>();
+        String header = "";
 
         try {
             DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
 
+            Path toPathFile = null;
             for (Path file : stream) {
-
-                list.add(file);
-
-
-
                 String s = String.valueOf(file.getFileName());
-                if (s.charAt(0)=='f') {//this apply getting files without closing browser
 
-                    /*String s = String.valueOf(file.getFileName());
+                if (s.charAt(0) == 'f') {//this apply getting files without closing browser
+                    //System.out.println(String.valueOf(file.getFileName()));
                     BufferedReader br = new BufferedReader((new FileReader(fromPath + "\\" + s)));
                     String line = br.readLine();
 
-                    if (line.startsWith("ID3")) {*/
-                    Path toPathFile = Paths.get(toPath + "\\" + file.getFileName() + ".mp3");
-                    if (!Files.exists(toPathFile)) {
-                        Files.createFile(toPathFile);// creating target dir
-                    }
-                    try {
-                        Files.copy(file, toPathFile, REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        e.printStackTrace();
 
+
+                    if (line.startsWith("ID3") || line.startsWith("TAG")) {
+                        toPathFile = Paths.get(toPath + "\\" + file.getFileName() + ".mp3");
+                        header = String.valueOf(file.getFileName()) + ".mp3";
+                        if (!Files.exists(toPathFile)) {
+                            Files.createFile(toPathFile);// creating target dir
+                        }
+                        try {
+                            Files.copy(file, toPathFile, REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+
+                        }
+                    } else {
+                        if (toPathFile != null) { //appending to the head file of the song
+                            FileInputStream fin=new FileInputStream(String.valueOf(file));
+                            byte[] data = new byte[fin.available()];
+                            fin.read(data, 0, fin.available());
+                            Files.write(toPathFile, data, StandardOpenOption.APPEND);
+                        }
                     }
-                    /*}*/
                 }
             }
         }
