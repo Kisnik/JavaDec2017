@@ -7,8 +7,8 @@ import java.nio.file.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ForChromium {
-    public static void getMusic(Path fromPath, Path toPath){
-        String header = "";
+    public static void getMusic(Path fromPath, Path toPath) {
+
 
         try {
             DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
@@ -18,15 +18,14 @@ public class ForChromium {
                 String s = String.valueOf(file.getFileName());
 
                 if (s.charAt(0) == 'f') {//this apply getting files without closing browser
-                    //System.out.println(String.valueOf(file.getFileName()));
+
                     BufferedReader br = new BufferedReader((new FileReader(fromPath + "\\" + s)));
                     String line = br.readLine();
 
 
-
                     if (line.startsWith("ID3") || line.startsWith("TAG")) {
                         toPathFile = Paths.get(toPath + "\\" + file.getFileName() + ".mp3");
-                        header = String.valueOf(file.getFileName()) + ".mp3";
+
                         if (!Files.exists(toPathFile)) {
                             Files.createFile(toPathFile);// creating target dir
                         }
@@ -38,7 +37,7 @@ public class ForChromium {
                         }
                     } else {
                         if (toPathFile != null) {
-                            FileInputStream fin=new FileInputStream(String.valueOf(file));
+                            FileInputStream fin = new FileInputStream(String.valueOf(file));
                             byte[] data = new byte[fin.available()];
                             fin.read(data, 0, fin.available());
                             Files.write(toPathFile, data, StandardOpenOption.APPEND);
@@ -46,9 +45,9 @@ public class ForChromium {
                     }
                 }
             }
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
+            //System.out.println("There is no such browser on your PC");;
         }
 
     }

@@ -5,15 +5,15 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ForMozilla {
-    public static void getMusic(Path fromPath, Path toPath){
+    public static void getMusic(Path fromPath, Path toPath) {
         try {
             DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
 
             for (Path file : stream) {
-
 
 
                 String s = String.valueOf(file.getFileName());
@@ -34,8 +34,7 @@ public class ForMozilla {
                 }
 
             }
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
