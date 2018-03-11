@@ -88,9 +88,6 @@ public class General {
             System.out.println("1 - help");
             comandMenu = Integer.parseInt(reader.readLine());
 
-        /*Path zipPath = Paths.get("D:\\MusicCache1\\Music.zip");
-        ForChromium.zipCreator(toPath, zipPath);
-        ForChromium.unZip(zipPath, Paths.get("D:\\MusicCache2"));*/
 
 
         }

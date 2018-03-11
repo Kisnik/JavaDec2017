@@ -18,8 +18,8 @@ public class Browser {
     public static void zipCreator(Path fromPath, Path zipPath) throws IOException {
         // out put file
         Path testPath = zipPath.getParent();
-        if(!Files.exists(testPath));
-        Files.createDirectory(testPath);
+        if(!Files.exists(testPath))
+            Files.createDirectory(testPath);
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(String.valueOf(zipPath)));
         DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
         // input file
