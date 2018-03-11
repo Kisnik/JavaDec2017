@@ -43,6 +43,10 @@ public class Browser {
     }
 
     public static void unZip(Path fromPath, Path toPath) throws IOException {
+        if (!(Files.exists(fromPath))) {
+            System.err.println("There is no such zip archive");
+            return;
+        }
         if (!Files.exists(toPath)) Files.createDirectory(toPath);
         FileInputStream fis;
         //buffer for read and write data to file
