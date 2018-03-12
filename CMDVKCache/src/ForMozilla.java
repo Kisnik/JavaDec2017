@@ -34,6 +34,7 @@ public class ForMozilla extends Browser {
                 }
 
             }
+            System.out.println("Cache copy completed");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

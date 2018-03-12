@@ -45,6 +45,7 @@ public class ForChromium extends Browser {
                     }
                 }
             }
+            System.out.println("Cache copy completed");
         } catch (IOException ex) {
             ex.printStackTrace();
             //System.out.println("There is no such browser on your PC");;
