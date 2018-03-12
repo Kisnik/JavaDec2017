@@ -15,8 +15,10 @@ public class General {
         System.out.println("4 - Yandex browser");
 
         int n = Integer.parseInt(reader.readLine());
-
-        Path toPath = Paths.get("D:\\MusicCache2");
+        System.out.println("Enter path to copy cache files");
+        System.out.println("For example: D:\\MusicCache");
+        String pathCache = reader.readLine();
+        Path toPath = Paths.get(pathCache);
         if (!Files.exists(toPath)) Files.createDirectory(toPath);// creating target path
 
         Path fromPathChrome = Paths.get(Paths.get(System.getProperty("user.home"), "AppData", "Local", "Google", "Chrome", "User Data", "Default", "Media Cache")
@@ -54,12 +56,16 @@ public class General {
                 case 1:
                     System.out.println("1 - Create ZIP archive of mp3 cache");
                     System.out.println("2 - Unzip mp3 cache");
+                    System.out.println("3 - delete files less fixed size in mb (you should specify size)");
                     int zipComand = Integer.parseInt(reader.readLine());
                     switch (zipComand) {
                         case 1:
                             System.out.println("Enter the path for ZIP archive");
                             System.out.println("For example: D:\\MusicCache\\Music.zip");
                             String pathZip = reader.readLine();
+                            if (!pathZip.substring(pathZip.length() - 4).equals(".zip")){
+                                System.err.println("Incorrect file format!!!");
+                                break;}
                             ForChromium.zipCreator(toPath, Paths.get(pathZip));
                             System.out.println("ZIP created");
                             break;
@@ -67,11 +73,29 @@ public class General {
                             System.out.println("Enter the path of ZIP archive");
                             System.out.println("For example: D:\\MusicCache\\Music.zip");
                             pathZip = reader.readLine();
+                            if (!pathZip.substring(pathZip.length() - 4).equals(".zip")){
+                                System.err.println("Incorrect file format!!!");
+                                break;}
                             System.out.println("Enter the path to unzip archive");
                             System.out.println("For example: D:\\MusicCache");
                             String pathUnZip = reader.readLine();
                             ForChromium.unZip(Paths.get(pathZip), Paths.get(pathUnZip));
                             System.out.println("unzip finished");
+                            break;
+                        case 3:
+                            System.out.println("Enter the path of the files");
+                            System.out.println("For example: D:\\MusicCache");
+                            pathZip = reader.readLine();
+                            System.out.println("Enter the max size of the files to delete, in mb");
+                            try {
+                                double maxSize = Double.parseDouble(reader.readLine());
+
+                                Browser.delData(Paths.get(pathZip), maxSize);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Incorrect input");
+                                break;
+                            }
+                            System.out.println("The procedure completed");
                             break;
                         default:
                             System.out.println("Incorrect input");

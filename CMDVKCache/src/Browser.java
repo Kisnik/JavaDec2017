@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,6 +78,19 @@ public class Browser {
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public static void delData(Path fromPath, double maxSize) throws IOException {
+        try {
+        DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
+        for (Path file : stream) {
+            if (Files.size(file) / (1024 * 1024) < maxSize && !Files.isDirectory(file)) {
+                Files.delete(file);
+            }
+        }
+
+        } catch (IOException e) {
+            System.out.println("Incorrect input");
         }
     }
 }
