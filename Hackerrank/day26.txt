@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int[] actualData = new int[3];
+        for(int i=0; i<3; i++) {
+            actualData[i] = in.nextInt();
+        }
+        int[] expectedData = new int[3];
+        for (int i=0; i<3; i++) {
+            expectedData[i] = in.nextInt();
+        }
+        in.close();
+        int numDays = actualData[0] - expectedData[0];
+        int numMonth = actualData[1] - expectedData[1];
+        int numYears = actualData[2] - expectedData[2];
+        if (numYears>0) System.out.println(10000);
+        else if (numMonth>0 && numYears==0) System.out.println(numMonth*500);
+        else if (numDays>0 && numYears ==0) System.out.println(numDays*15);
+        else System.out.println(0);
+    }
+}

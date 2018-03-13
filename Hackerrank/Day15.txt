@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+
+class Node {
+	int data;
+	Node next;
+	Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+class Solution {
+    public static  Node insert(Node head,int data) {
+        //Complete this method
+        Node point=head;
+        Node tmp=null;
+        if(point==null)
+        {
+            tmp=new Node(data);
+            point=tmp;
+            return tmp;
+        }
+        else {
+            tmp=point;
+            while(point.next!=null)
+            {
+                point=point.next;
+            }
+            point.next=new Node(data);
+            point=point.next;
+            point.data=data;
+            
+            return tmp;
+ 
+        }   
+    }
+	public static void display(Node head) {
+        Node start = head;
+        while(start != null) {
+            System.out.print(start.data + " ");
+            start = start.next;
+        }
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        Node head = null;
+        int N = sc.nextInt();
+
+        while(N-- > 0) {
+            int ele = sc.nextInt();
+            head = insert(head,ele);
+        }
+        display(head);
+        sc.close();
+    }
+}
