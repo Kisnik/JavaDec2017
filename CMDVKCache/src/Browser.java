@@ -7,6 +7,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -92,5 +95,44 @@ public class Browser {
         } catch (IOException e) {
             System.out.println("Incorrect input");
         }
+    }
+    public static LinkedList<Path> pathToLinkedList(Path fromPath) {
+        DirectoryStream<Path> stream = null;
+        try {
+            stream = Files.newDirectoryStream(fromPath);
+            LinkedList<Path> listOfFiles = new LinkedList<Path>();
+            for (Path file : stream) {
+                listOfFiles.add(file.getFileName());
+            }
+            return listOfFiles;
+        } catch (IOException e) {
+            System.out.println("There is no such path");
+        }
+        return null;
+    }
+
+    public static void sortPath(Path fromPath) {
+
+        LinkedList<Path> listOfFiles = pathToLinkedList(fromPath);
+        if (listOfFiles == null) return;
+        Collections.sort(listOfFiles, new Comparator<Path>() {
+            @Override
+            public int compare(Path o1, Path o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        System.out.println(listOfFiles.toString());
+
+
+    }
+
+    public static int numOfFiles(Path fromPath) {
+        LinkedList<Path> listOfFiles = null;
+
+        listOfFiles = pathToLinkedList(fromPath);
+        if (listOfFiles != null)
+            return listOfFiles.size();
+        else return 0;
+
     }
 }

@@ -57,6 +57,8 @@ public class General {
                     System.out.println("1 - Create ZIP archive of mp3 cache");
                     System.out.println("2 - Unzip mp3 cache");
                     System.out.println("3 - delete files less fixed size in mb (you should specify size)");
+                    System.out.println("4 - Out names of files in the path");
+                    System.out.println("5 - Number of files");
                     int zipComand = Integer.parseInt(reader.readLine());
                     switch (zipComand) {
                         case 1:
@@ -73,9 +75,13 @@ public class General {
                             System.out.println("Enter the path of ZIP archive");
                             System.out.println("For example: D:\\MusicCache\\Music.zip");
                             pathZip = reader.readLine();
-                            if (!pathZip.substring(pathZip.length() - 4).equals(".zip")){
-                                System.err.println("Incorrect file format!!!");
-                                break;}
+                            try {
+                                if (!pathZip.substring(pathZip.length() - 4).equals(".zip")){
+                                    System.err.println("Incorrect file format");
+                                    break;}
+                            } catch (StringIndexOutOfBoundsException e) {
+                                System.err.println("Incorrect input");
+                            }
                             System.out.println("Enter the path to unzip archive");
                             System.out.println("For example: D:\\MusicCache");
                             String pathUnZip = reader.readLine();
@@ -96,6 +102,18 @@ public class General {
                                 break;
                             }
                             System.out.println("The procedure completed");
+                            break;
+                        case 4:
+                            System.out.println("Enter the path of the files");
+                            System.out.println("For example: D:\\MusicCache");
+                            String pathOfFile = reader.readLine();
+                            Browser.sortPath(Paths.get(pathOfFile));
+                            break;
+                        case 5:
+                            System.out.println("Enter the path of the files");
+                            System.out.println("For example: D:\\MusicCache");
+                            pathOfFile = reader.readLine();
+                            System.out.println("There are " + Browser.numOfFiles(Paths.get(pathOfFile)) + " files");
                             break;
                         default:
                             System.out.println("Incorrect input");
