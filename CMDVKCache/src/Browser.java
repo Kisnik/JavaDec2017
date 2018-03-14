@@ -20,7 +20,7 @@ public class Browser {
     public static void getMusic(Path fromPath, Path toPath) {
     }
 
-    public static void zipCreator(Path fromPath, Path zipPath) throws IOException {
+    public static void zipCreator(Path fromPath, Path zipPath) throws IOException { //method to create Zip
         // out put file
         Path testPath = zipPath.getParent();
         if(!Files.exists(testPath))
@@ -47,7 +47,7 @@ public class Browser {
         out.close();
     }
 
-    public static void unZip(Path fromPath, Path toPath) throws IOException {
+    public static void unZip(Path fromPath, Path toPath) throws IOException { //the unZip method
         if (!(Files.exists(fromPath))) {
             System.err.println("There is no such zip archive");
             return;
@@ -83,7 +83,7 @@ public class Browser {
             e.printStackTrace();
         }
     }
-    public static void delData(Path fromPath, double maxSize) throws IOException {
+    public static void delData(Path fromPath, double maxSize) throws IOException { // method for deleting data
         try {
         DirectoryStream<Path> stream = Files.newDirectoryStream(fromPath);
         for (Path file : stream) {
@@ -111,7 +111,7 @@ public class Browser {
         return null;
     }
 
-    public static void sortPath(Path fromPath) {
+    public static void sortPath(Path fromPath) { //sorting and printing names of files
 
         LinkedList<Path> listOfFiles = pathToLinkedList(fromPath);
         if (listOfFiles == null) return;
@@ -126,7 +126,7 @@ public class Browser {
 
     }
 
-    public static int numOfFiles(Path fromPath) {
+    public static int numOfFiles(Path fromPath) { //counting number of files
         LinkedList<Path> listOfFiles = null;
 
         listOfFiles = pathToLinkedList(fromPath);
